@@ -22,7 +22,7 @@ Ambus is a simple, easy to read, querry - response protocol. Data are transferre
 - CHECKSUM: 1 character
 - max 54 characters per message
 
-Receiver allways RESPONSEs to QUERRY - confirms the received packet even no data is required.
+Receiver always RESPONSEs to QUERRY - confirms the received packet even no data is required.
 
 ### Reserved characters:
 - $ (0x24) - start of message
