@@ -1,4 +1,4 @@
-# Ambus - windows control application
+# Ambus - Windows control application
 PC sw application to control HW peripherals with custom serial communication protocol.
 
 ## Protocol desctription
