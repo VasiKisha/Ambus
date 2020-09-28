@@ -692,7 +692,7 @@ namespace AMBUS_Master
 
             if (sum == Convert.ToByte(START_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);      //osetreni zakazaneho znaku dolar $
             if (sum == Convert.ToByte(SEPARATOR)) return Convert.ToChar(SUBSTITUTE);            //osetreni zakazaneho znaku středník ;
-            //pridat ošetření zakázaného znaku nový rádek: \n
+            if (sum == Convert.ToByte(END_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);        //osetreni zakazaneho znaku středník ;
             return Convert.ToChar(sum);
         }
     }
