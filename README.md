@@ -30,6 +30,7 @@ Receiver always RESPONSEs to QUERRY - confirms the received packet even no data 
 - \n (0x0A) - end of message
 
 ### Checksum
+Only characters from start of message to the last semicolon (both included) are used for checksum.
 ```c#
             char sum = 0;
             foreach(char c in message)
