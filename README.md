@@ -39,4 +39,4 @@ Only characters from start of message to the last semicolon (both included) are 
             }
             return sum
 ```
-If result of checksum is reserved character (0x24, 0x3B or 0x0A) then the checksum is substituted by 0x1A.
+If result of checksum is reserved character (0x24, 0x3B or 0x0A) then the checksum is summed with 0x80.
