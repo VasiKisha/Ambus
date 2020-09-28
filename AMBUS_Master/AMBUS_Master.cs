@@ -1,15 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace AMBUS_Master
 {
@@ -19,15 +12,14 @@ namespace AMBUS_Master
     
         int RADAR_WIDTH = 1600, RADAR_HEIGHT = 1600; //radar width x height
 
-        Bitmap bmp; //radar
+        Bitmap bmp;         //radar
 
         int beam_angle;     //angle of radar beam
         bool beam_dir;      //beam rotatio direction: 1 = clockwise, 0 = counted clockwise
         int beam_length;    //lenght of beam;
-        double rLenght;      //relative lenght to detection point
+        double rLenght;     //relative lenght to detection point
         int range;
         int cx, cy;         //center of radar circle
-        int radarStart;     //radar operation on/off
 
         public AMBUS_Master()
         {
@@ -65,10 +57,10 @@ namespace AMBUS_Master
             bmp = new Bitmap(RADAR_WIDTH + 1, RADAR_HEIGHT + 1);
             cx = RADAR_WIDTH / 2;
             cy = RADAR_HEIGHT / 2;
-            beam_angle = 900;        //initial angle of hand
+            beam_angle = 900;           //initial angle of hand
             beam_length = RADAR_WIDTH / 2;
-            beam_dir = true;        //clockwise direction
-            t.Interval = 100;        //interval between radar measurements
+            beam_dir = true;            //clockwise direction
+            t.Interval = 100;           //interval between radar measurements
             t.Tick += new EventHandler(this.t_Tick);
             serialPort.Encoding = System.Text.Encoding.GetEncoding(1252);
         }
@@ -99,9 +91,6 @@ namespace AMBUS_Master
                 comboBoxSerialBaud.Enabled = true;
                 comboBoxSerialName.Enabled = true;
                 richTextBoxComm.AppendText("Serial port " + comboBoxSerialName.Text + " closed\n", Color.Green);
-                //buttonRadarStart.Enabled = false;
-                //t.Stop();
-                //buttonRadarStart.Text = "Start";
             }
             else
             {
@@ -115,7 +104,6 @@ namespace AMBUS_Master
                     comboBoxSerialName.Enabled = false;
                     comboBoxSerialBaud.Enabled = false;
                     richTextBoxComm.AppendText("Serial port " + comboBoxSerialName.Text + " opened\n", Color.Green);
-                    //buttonRadarStart.Enabled = true;
                 }
                 catch
                 {
@@ -126,31 +114,16 @@ namespace AMBUS_Master
 
         private void buttonSend_Click(object sender, EventArgs e)
         {
-            //kontrola otevření portu
+            //open port check
             if (!serialPort.IsOpen) return;
 
-            //sestavení packetu
+            //packet composition
             byte[] packet = new byte[Ambus.PACKET_SIZE];
             packet = Ambus.GetPacket(textBoxAddress.Text, textBoxCommand.Text, textBoxData.Text);
             
-
-            //dotaz
+            //querry
             serialPort.Write(packet, 0, packet.Length);
             richTextBoxComm.AppendText(Encoding.UTF8.GetString(packet), Color.HotPink);
-           
-            //richTextBoxComm.AppendText(BitConverter.ToString(packet));
-
-            //odpoved
-            //try
-            //{
-            //    richTextBoxComm.AppendText(serialPort.ReadLine());
-            //    richTextBoxComm.AppendText(Environment.NewLine);
-            //}
-            //catch (TimeoutException)
-            //{
-            //    richTextBoxComm.AppendText("Error, Device " + textBoxAddress.Text + " not responding\n", Color.Red);
-            //    return;
-            //}
         }
 
         private void richTextBoxComm_MouseDown(object sender, MouseEventArgs e)
@@ -194,16 +167,12 @@ namespace AMBUS_Master
             {
                 txt = serialPort.ReadLine() + '\n';
                 SetText(txt, Color.Black);
-                //Debug.WriteLine("Address: " + Ambus.GetAddress(txt));
-                //Debug.WriteLine("Command: " + Ambus.GetCommand(txt));
-                //Debug.WriteLine("Data: " + Ambus.GetData(txt));
                 if (Ambus.GetAddress(txt) == Ambus.GetMyAddress() && Ambus.GetCommand(txt) == "Dur?")
                 {
                     int temp = int.Parse(Ambus.GetData(txt));
                     if (temp == 0) rLenght = 1;
                     else if (temp > range) rLenght = 1;
-                    else rLenght = ((double)temp / range);
-                    //rLenght /= 2;
+                    else rLenght = (double)temp / range;
                 }
             }
             catch
@@ -675,9 +644,9 @@ namespace AMBUS_Master
                 sum = (sum + b) % 255;
             }
 
-            if (sum == Convert.ToByte(START_OF_PACKET)) return SUBSTITUTE;      //osetreni zakazaneho znaku dolar $
-            if (sum == Convert.ToByte(SEPARATOR)) return SUBSTITUTE;            //osetreni zakazaneho znaku středník ;
-            //pridat ošetření zakázaného znaku nový rádek: \n
+            if (sum == Convert.ToByte(START_OF_PACKET)) return SUBSTITUTE;      //reserved character substitution: start of packet
+            if (sum == Convert.ToByte(SEPARATOR)) return SUBSTITUTE;            //reserved character substitution: separator
+            if (sum == Convert.ToByte(END_OF_PACKET)) return SUBSTITUTE;        //reserved character substitution: end of packet
             return (byte)sum;
         }
 
@@ -690,9 +659,9 @@ namespace AMBUS_Master
                 sum = (sum + b) % 255;
             }
 
-            if (sum == Convert.ToByte(START_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);      //osetreni zakazaneho znaku dolar $
-            if (sum == Convert.ToByte(SEPARATOR)) return Convert.ToChar(SUBSTITUTE);            //osetreni zakazaneho znaku středník ;
-            if (sum == Convert.ToByte(END_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);        //osetreni zakazaneho znaku středník ;
+            if (sum == Convert.ToByte(START_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);      //reserved character substitution: start of packet
+            if (sum == Convert.ToByte(SEPARATOR)) return Convert.ToChar(SUBSTITUTE);            //reserved character substitution: separator
+            if (sum == Convert.ToByte(END_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);        //reserved character substitution: end of packet
             return Convert.ToChar(sum);
         }
     }
