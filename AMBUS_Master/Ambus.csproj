@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ambus.cs" />
     <Compile Include="AMBUS_Master.cs">
       <SubType>Form</SubType>
     </Compile>
