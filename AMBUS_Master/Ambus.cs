@@ -340,14 +340,15 @@ namespace AMBUS_Master
         {
             int sum = 0;
 
-            foreach(byte b in data)
+            foreach (byte b in data)
             {
                 sum = (sum + b) % 255;
             }
 
-            if (sum == Convert.ToByte(START_OF_PACKET)) return SUBSTITUTE;      //reserved character substitution: start of packet
-            if (sum == Convert.ToByte(SEPARATOR)) return SUBSTITUTE;            //reserved character substitution: separator
-            if (sum == Convert.ToByte(END_OF_PACKET)) return SUBSTITUTE;        //reserved character substitution: end of packet
+            if (sum == Convert.ToByte(START_OF_PACKET) || sum == Convert.ToByte(SEPARATOR) || sum == Convert.ToByte(END_OF_PACKET))
+            {
+                sum += 0x80;
+            }
             return (byte)sum;
         }
 
@@ -360,9 +361,10 @@ namespace AMBUS_Master
                 sum = (sum + b) % 255;
             }
 
-            if (sum == Convert.ToByte(START_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);      //reserved character substitution: start of packet
-            if (sum == Convert.ToByte(SEPARATOR)) return Convert.ToChar(SUBSTITUTE);            //reserved character substitution: separator
-            if (sum == Convert.ToByte(END_OF_PACKET)) return Convert.ToChar(SUBSTITUTE);        //reserved character substitution: end of packet
+            if (sum == Convert.ToByte(START_OF_PACKET) || sum == Convert.ToByte(SEPARATOR) || sum == Convert.ToByte(END_OF_PACKET))
+            {
+                sum += 0x80;
+            }
             return Convert.ToChar(sum);
         }
     }
