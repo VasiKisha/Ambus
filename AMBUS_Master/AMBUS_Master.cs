@@ -9,13 +9,15 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 namespace AMBUS_Master
 {
     public partial class AMBUS_Master : Form
     {
-        Timer t = new Timer(); //radar timer
-    
+        //Timer t = new Timer(); //radar timer
+        System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+
         int RADAR_WIDTH = 1600, RADAR_HEIGHT = 1600; //radar width x height
 
         Bitmap bmp;         //radar
