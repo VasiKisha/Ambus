@@ -124,14 +124,27 @@ namespace AMBUS_Master
         {
             //open port check
             if (!serialPort.IsOpen) return;
+            int endOfPacket = 0;
 
             //packet composition
             byte[] packet = new byte[Ambus.PACKET_SIZE];
             packet = Ambus.GetPacket(textBoxAddress.Text, textBoxCommand.Text, textBoxData.Text);
             
             //querry
-            serialPort.Write(packet, 0, packet.Length);
+            serialPort.Write(packet, 0, Ambus.GetPacketLength(packet));
             richTextBoxComm.AppendText(Encoding.UTF8.GetString(packet), Color.HotPink);
+
+            //response
+            string txt;
+            try
+            {
+                txt = serialPort.ReadLine() + '\n';
+                richTextBoxComm.AppendText(txt, Color.Black);
+            }
+            catch
+            {
+                richTextBoxComm.AppendText("ERROR: Timeout\r", Color.Red);
+            }
         }
 
         private void richTextBoxComm_MouseDown(object sender, MouseEventArgs e)
@@ -152,6 +165,7 @@ namespace AMBUS_Master
             richTextBoxComm.ScrollToCaret();
         }
 
+        /*
         private delegate void SafeCallDelegate(string text, Color color);
 
         private void SetText(string text, Color color)
@@ -167,9 +181,10 @@ namespace AMBUS_Master
 
             }
         }
-
+        */
         private void serialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
+            /*
             string txt;
             try
             {
@@ -186,9 +201,8 @@ namespace AMBUS_Master
             catch
             {
                 //SetText("Error, Device " + textBoxAddress.Text + " not responding\n", Color.Red);
-            }
-
-            
+            }           
+            */
         }
 
         private void textBoxRange_TextChanged(object sender, EventArgs e)
@@ -238,12 +252,40 @@ namespace AMBUS_Master
             byte[] packet = new byte[Ambus.PACKET_SIZE];
             if (beam_angle % 10 == 0)
             {
+                string txt;
                 packet = Ambus.GetPacket("ECHO1", "An", (beam_angle / 10).ToString());
-                serialPort.Write(packet, 0, packet.Length);
+                serialPort.Write(packet, 0, Ambus.GetPacketLength(packet));
                 richTextBoxComm.AppendText(Encoding.UTF8.GetString(packet), Color.HotPink);
+                try
+                {
+                    txt = serialPort.ReadLine() + '\n';
+                    richTextBoxComm.AppendText(txt, Color.Black);
+                }
+                catch
+                {
+                    richTextBoxComm.AppendText("ERROR: Timeout\r", Color.Red);
+                }
+
                 packet = Ambus.GetPacket("ECHO1", "Dur?");
-                serialPort.Write(packet, 0, packet.Length);
+                serialPort.Write(packet, 0, Ambus.GetPacketLength(packet));
                 richTextBoxComm.AppendText(Encoding.UTF8.GetString(packet), Color.HotPink);
+                try
+                {
+                    txt = serialPort.ReadLine() + '\n';
+                    richTextBoxComm.AppendText(txt, Color.Black);
+                    if (Ambus.GetAddress(txt) == Ambus.GetMyAddress() && Ambus.GetCommand(txt) == "Dur?")
+                    {
+                        int temp = int.Parse(Ambus.GetData(txt));
+                        if (temp == 0) rLenght = 1;
+                        else if (temp > range) rLenght = 1;
+                        else rLenght = (double)temp / range;
+                    }
+                }
+                catch
+                {
+                    richTextBoxComm.AppendText("ERROR: Timeout\r", Color.Red);
+                }
+
             }
             Debug.WriteLine(rLenght);
             //

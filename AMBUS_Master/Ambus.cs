@@ -93,6 +93,18 @@ namespace AMBUS_Master
             return packet;
         }
 
+        public static int GetPacketLength(byte[] packet)
+        {
+            int eopPos = 0;     //end of packet postition
+            foreach (byte b in packet)
+            {
+                eopPos++;
+                if (b == Convert.ToByte(Ambus.END_OF_PACKET)) break;
+            }
+
+            return eopPos;
+        }
+
         public static bool ValidatePacket(byte[] packet)
         {
             int sop = -1, eop = -1;
