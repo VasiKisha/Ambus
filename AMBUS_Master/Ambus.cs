@@ -121,7 +121,7 @@ namespace AMBUS_Master
             foreach (byte b in packet)
             {
                 eopPos++;
-                if (b == Convert.ToByte(Ambus.END_OF_PACKET)) break;
+                if (b == Convert.ToByte(END_OF_PACKET)) break;
             }
 
             return eopPos;
