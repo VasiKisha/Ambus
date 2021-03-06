@@ -2,8 +2,10 @@
 PC sw application to control HW peripherals with custom serial communication protocol.
 
 ## Contains
-- Ambus Terminal
-- EchoRadar GUI
+- Ambus Terminal  
+![Alt text](/pictures/console.png)
+- EchoRadar GUI  
+![Alt text](/pictures/radar.png)
 - UPPSU GUI
 
 ## Peripheral hardware
