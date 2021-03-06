@@ -4,6 +4,7 @@ PC sw application to control HW peripherals with custom serial communication pro
 ## Contains
 - Ambus Terminal
 - EchoRadar GUI
+- UPPSU GUI
 
 ## Peripheral hardware
 - [Echo Radar](https://github.com/VasiKisha/Ambus---EchoRadar)
