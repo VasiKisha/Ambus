@@ -29,13 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AMBUS_Master));
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.groupBoxSerial = new System.Windows.Forms.GroupBox();
-            this.buttonSerialOpen = new System.Windows.Forms.Button();
-            this.comboBoxSerialBaud = new System.Windows.Forms.ComboBox();
-            this.labelSerialBaud = new System.Windows.Forms.Label();
-            this.comboBoxSerialName = new System.Windows.Forms.ComboBox();
-            this.labelSerialName = new System.Windows.Forms.Label();
             this.tabControlComm = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.richTextBoxComm = new System.Windows.Forms.RichTextBox();
@@ -46,85 +41,32 @@
             this.labelData = new System.Windows.Forms.Label();
             this.labelCommand = new System.Windows.Forms.Label();
             this.labelAddress = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBoxRange = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonRadarStart = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelCOM = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCOMState = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelBaud = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStripComm = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItemClearWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBoxSerial.SuspendLayout();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.echoRadarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.UPPSUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showCRCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showCRCAsHexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideCRCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlComm.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.contextMenuStripComm.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort
             // 
             this.serialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_DataReceived);
-            // 
-            // groupBoxSerial
-            // 
-            this.groupBoxSerial.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxSerial.Controls.Add(this.buttonSerialOpen);
-            this.groupBoxSerial.Controls.Add(this.comboBoxSerialBaud);
-            this.groupBoxSerial.Controls.Add(this.labelSerialBaud);
-            this.groupBoxSerial.Controls.Add(this.comboBoxSerialName);
-            this.groupBoxSerial.Controls.Add(this.labelSerialName);
-            this.groupBoxSerial.Location = new System.Drawing.Point(622, 12);
-            this.groupBoxSerial.Name = "groupBoxSerial";
-            this.groupBoxSerial.Size = new System.Drawing.Size(150, 129);
-            this.groupBoxSerial.TabIndex = 0;
-            this.groupBoxSerial.TabStop = false;
-            this.groupBoxSerial.Text = "Serial";
-            // 
-            // buttonSerialOpen
-            // 
-            this.buttonSerialOpen.Location = new System.Drawing.Point(6, 99);
-            this.buttonSerialOpen.Name = "buttonSerialOpen";
-            this.buttonSerialOpen.Size = new System.Drawing.Size(138, 23);
-            this.buttonSerialOpen.TabIndex = 4;
-            this.buttonSerialOpen.Text = "Open";
-            this.buttonSerialOpen.UseVisualStyleBackColor = true;
-            this.buttonSerialOpen.Click += new System.EventHandler(this.buttonSerialOpen_Click);
-            // 
-            // comboBoxSerialBaud
-            // 
-            this.comboBoxSerialBaud.FormattingEnabled = true;
-            this.comboBoxSerialBaud.Location = new System.Drawing.Point(6, 72);
-            this.comboBoxSerialBaud.Name = "comboBoxSerialBaud";
-            this.comboBoxSerialBaud.Size = new System.Drawing.Size(138, 21);
-            this.comboBoxSerialBaud.TabIndex = 3;
-            // 
-            // labelSerialBaud
-            // 
-            this.labelSerialBaud.AutoSize = true;
-            this.labelSerialBaud.Location = new System.Drawing.Point(3, 56);
-            this.labelSerialBaud.Name = "labelSerialBaud";
-            this.labelSerialBaud.Size = new System.Drawing.Size(32, 13);
-            this.labelSerialBaud.TabIndex = 2;
-            this.labelSerialBaud.Text = "Baud";
-            // 
-            // comboBoxSerialName
-            // 
-            this.comboBoxSerialName.FormattingEnabled = true;
-            this.comboBoxSerialName.Location = new System.Drawing.Point(6, 32);
-            this.comboBoxSerialName.Name = "comboBoxSerialName";
-            this.comboBoxSerialName.Size = new System.Drawing.Size(138, 21);
-            this.comboBoxSerialName.TabIndex = 1;
-            this.comboBoxSerialName.SelectionChangeCommitted += new System.EventHandler(this.refreshCOM);
-            // 
-            // labelSerialName
-            // 
-            this.labelSerialName.AutoSize = true;
-            this.labelSerialName.Location = new System.Drawing.Point(3, 16);
-            this.labelSerialName.Name = "labelSerialName";
-            this.labelSerialName.Size = new System.Drawing.Size(35, 13);
-            this.labelSerialName.TabIndex = 1;
-            this.labelSerialName.Text = "Name";
             // 
             // tabControlComm
             // 
@@ -132,12 +74,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlComm.Controls.Add(this.tabPageGeneral);
-            this.tabControlComm.Controls.Add(this.tabPage1);
-            this.tabControlComm.Location = new System.Drawing.Point(0, 0);
+            this.tabControlComm.Location = new System.Drawing.Point(0, 27);
             this.tabControlComm.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.tabControlComm.Name = "tabControlComm";
             this.tabControlComm.SelectedIndex = 0;
-            this.tabControlComm.Size = new System.Drawing.Size(616, 539);
+            this.tabControlComm.Size = new System.Drawing.Size(784, 512);
             this.tabControlComm.TabIndex = 1;
             // 
             // tabPageGeneral
@@ -153,7 +94,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(608, 513);
+            this.tabPageGeneral.Size = new System.Drawing.Size(776, 486);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "Console";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -166,7 +107,7 @@
             this.richTextBoxComm.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.richTextBoxComm.Location = new System.Drawing.Point(8, 47);
             this.richTextBoxComm.Name = "richTextBoxComm";
-            this.richTextBoxComm.Size = new System.Drawing.Size(594, 460);
+            this.richTextBoxComm.Size = new System.Drawing.Size(762, 433);
             this.richTextBoxComm.TabIndex = 7;
             this.richTextBoxComm.Text = "";
             this.richTextBoxComm.TextChanged += new System.EventHandler(this.richTextBoxComm_TextChanged);
@@ -175,7 +116,7 @@
             // buttonSend
             // 
             this.buttonSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSend.Location = new System.Drawing.Point(527, 19);
+            this.buttonSend.Location = new System.Drawing.Point(695, 19);
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(75, 22);
             this.buttonSend.TabIndex = 6;
@@ -190,7 +131,7 @@
             this.textBoxData.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.textBoxData.Location = new System.Drawing.Point(178, 19);
             this.textBoxData.Name = "textBoxData";
-            this.textBoxData.Size = new System.Drawing.Size(343, 22);
+            this.textBoxData.Size = new System.Drawing.Size(511, 22);
             this.textBoxData.TabIndex = 5;
             // 
             // textBoxCommand
@@ -236,75 +177,59 @@
             this.labelAddress.TabIndex = 0;
             this.labelAddress.Text = "Address";
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.textBoxRange);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.buttonRadarStart);
-            this.tabPage1.Controls.Add(this.pictureBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(608, 513);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "Echo Radar";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // textBoxRange
-            // 
-            this.textBoxRange.Location = new System.Drawing.Point(87, 19);
-            this.textBoxRange.Name = "textBoxRange";
-            this.textBoxRange.Size = new System.Drawing.Size(42, 20);
-            this.textBoxRange.TabIndex = 3;
-            this.textBoxRange.TextChanged += new System.EventHandler(this.textBoxRange_TextChanged);
-            this.textBoxRange.Leave += new System.EventHandler(this.textBoxRange_Leave);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(87, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Range:";
-            // 
-            // buttonRadarStart
-            // 
-            this.buttonRadarStart.Location = new System.Drawing.Point(6, 6);
-            this.buttonRadarStart.Name = "buttonRadarStart";
-            this.buttonRadarStart.Size = new System.Drawing.Size(75, 34);
-            this.buttonRadarStart.TabIndex = 1;
-            this.buttonRadarStart.Text = "Start";
-            this.buttonRadarStart.UseVisualStyleBackColor = true;
-            this.buttonRadarStart.Click += new System.EventHandler(this.buttonRadarStart_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 46);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(608, 468);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelCOM,
+            this.toolStripStatusLabelCOMState,
+            this.toolStripStatusLabelBaud});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 536);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(784, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(784, 25);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabelCOM
+            // 
+            this.toolStripStatusLabelCOM.AutoSize = false;
+            this.toolStripStatusLabelCOM.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabelCOM.Margin = new System.Windows.Forms.Padding(10, 3, 0, 2);
+            this.toolStripStatusLabelCOM.Name = "toolStripStatusLabelCOM";
+            this.toolStripStatusLabelCOM.Size = new System.Drawing.Size(50, 20);
+            this.toolStripStatusLabelCOM.Text = "COM";
+            this.toolStripStatusLabelCOM.Click += new System.EventHandler(this.toolStripStatusLabelCOM_Click);
+            // 
+            // toolStripStatusLabelCOMState
+            // 
+            this.toolStripStatusLabelCOMState.AutoSize = false;
+            this.toolStripStatusLabelCOMState.Margin = new System.Windows.Forms.Padding(5, 3, 5, 2);
+            this.toolStripStatusLabelCOMState.Name = "toolStripStatusLabelCOMState";
+            this.toolStripStatusLabelCOMState.Size = new System.Drawing.Size(60, 20);
+            this.toolStripStatusLabelCOMState.Text = "ComState";
+            this.toolStripStatusLabelCOMState.Click += new System.EventHandler(this.toolStripStatusLabelCOMState_Click);
+            // 
+            // toolStripStatusLabelBaud
+            // 
+            this.toolStripStatusLabelBaud.AutoSize = false;
+            this.toolStripStatusLabelBaud.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.toolStripStatusLabelBaud.Name = "toolStripStatusLabelBaud";
+            this.toolStripStatusLabelBaud.Size = new System.Drawing.Size(80, 20);
+            this.toolStripStatusLabelBaud.Text = "Baud";
+            this.toolStripStatusLabelBaud.Click += new System.EventHandler(this.toolStripStatusLabelBaud_Click);
             // 
             // contextMenuStripComm
             // 
             this.contextMenuStripComm.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStripMenuItemClearWindow});
+            this.ToolStripMenuItemClearWindow,
+            this.showCRCToolStripMenuItem,
+            this.showCRCAsHexToolStripMenuItem,
+            this.hideCRCToolStripMenuItem});
             this.contextMenuStripComm.Name = "contextMenuStripComm";
-            this.contextMenuStripComm.Size = new System.Drawing.Size(149, 26);
+            this.contextMenuStripComm.Size = new System.Drawing.Size(181, 114);
             // 
             // ToolStripMenuItemClearWindow
             // 
@@ -312,6 +237,88 @@
             this.ToolStripMenuItemClearWindow.Size = new System.Drawing.Size(148, 22);
             this.ToolStripMenuItemClearWindow.Text = "Clear Window";
             this.ToolStripMenuItemClearWindow.Click += new System.EventHandler(this.ToolStripMenuItemClearWindow_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolsToolStripMenuItem,
+            this.connectionToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.TabIndex = 3;
+            this.menuStrip1.Text = "menuStrip";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.echoRadarToolStripMenuItem,
+            this.UPPSUToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // connectionToolStripMenuItem
+            // 
+            this.connectionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.settingsToolStripMenuItem});
+            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.connectionToolStripMenuItem.Text = "Connection";
+            // 
+            // echoRadarToolStripMenuItem
+            // 
+            this.echoRadarToolStripMenuItem.Image = global::AMBUS_Master.Properties.Resources.RadarChart_16x;
+            this.echoRadarToolStripMenuItem.Name = "echoRadarToolStripMenuItem";
+            this.echoRadarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.echoRadarToolStripMenuItem.Text = "EchoRadar";
+            this.echoRadarToolStripMenuItem.Click += new System.EventHandler(this.echoRadarToolStripMenuItem_Click);
+            // 
+            // UPPSUToolStripMenuItem
+            // 
+            this.UPPSUToolStripMenuItem.Image = global::AMBUS_Master.Properties.Resources.PowerSupply_16x;
+            this.UPPSUToolStripMenuItem.Name = "UPPSUToolStripMenuItem";
+            this.UPPSUToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.UPPSUToolStripMenuItem.Text = "UPPSU";
+            this.UPPSUToolStripMenuItem.Click += new System.EventHandler(this.UPPSUToolStripMenuItem_Click);
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Image = global::AMBUS_Master.Properties.Resources.Connect_16x;
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open COM Port";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Image = global::AMBUS_Master.Properties.Resources.Settings_16x;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // showCRCToolStripMenuItem
+            // 
+            this.showCRCToolStripMenuItem.Name = "showCRCToolStripMenuItem";
+            this.showCRCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showCRCToolStripMenuItem.Text = "Show CRC";
+            this.showCRCToolStripMenuItem.Click += new System.EventHandler(this.showCRCToolStripMenuItem_Click);
+            // 
+            // showCRCAsHexToolStripMenuItem
+            // 
+            this.showCRCAsHexToolStripMenuItem.Name = "showCRCAsHexToolStripMenuItem";
+            this.showCRCAsHexToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showCRCAsHexToolStripMenuItem.Text = "Show CRC as Hex";
+            this.showCRCAsHexToolStripMenuItem.Click += new System.EventHandler(this.showCRCAsHexToolStripMenuItem_Click);
+            // 
+            // hideCRCToolStripMenuItem
+            // 
+            this.hideCRCToolStripMenuItem.Name = "hideCRCToolStripMenuItem";
+            this.hideCRCToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hideCRCToolStripMenuItem.Text = "Hide CRC";
+            this.hideCRCToolStripMenuItem.Click += new System.EventHandler(this.hideCRCToolStripMenuItem_Click);
             // 
             // AMBUS_Master
             // 
@@ -321,23 +328,23 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.tabControlComm);
-            this.Controls.Add(this.groupBoxSerial);
             this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "AMBUS_Master";
-            this.ShowIcon = false;
             this.Text = "AMBUS Master";
             this.Load += new System.EventHandler(this.AMBUS_Master_Load);
-            this.groupBoxSerial.ResumeLayout(false);
-            this.groupBoxSerial.PerformLayout();
             this.tabControlComm.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.contextMenuStripComm.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,12 +353,6 @@
         #endregion
 
         private System.IO.Ports.SerialPort serialPort;
-        private System.Windows.Forms.GroupBox groupBoxSerial;
-        private System.Windows.Forms.Button buttonSerialOpen;
-        private System.Windows.Forms.ComboBox comboBoxSerialBaud;
-        private System.Windows.Forms.Label labelSerialBaud;
-        private System.Windows.Forms.ComboBox comboBoxSerialName;
-        private System.Windows.Forms.Label labelSerialName;
         private System.Windows.Forms.TabPage tabPageGeneral;
         private System.Windows.Forms.Button buttonSend;
         private System.Windows.Forms.TextBox textBoxData;
@@ -365,11 +366,19 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemClearWindow;
         private System.Windows.Forms.RichTextBox richTextBoxComm;
         private System.Windows.Forms.TabControl tabControlComm;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonRadarStart;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxRange;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem echoRadarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem UPPSUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCOM;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBaud;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCOMState;
+        private System.Windows.Forms.ToolStripMenuItem showCRCToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showCRCAsHexToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideCRCToolStripMenuItem;
     }
 }
 
