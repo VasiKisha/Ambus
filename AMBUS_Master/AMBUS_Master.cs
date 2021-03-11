@@ -127,6 +127,7 @@ namespace AMBUS_Master
             uppsuControl.ParentTab = uppsuPage;
             uppsuControl.ParentTabControl = tabControlComm;
             uppsuControl.SerialPort = serialPort;
+            uppsuControl.RichTextBoxComm = richTextBoxComm;
 
             uppsuPage.Controls.Add(uppsuControl);
             tabControlComm.SelectTab(uppsuPage);
