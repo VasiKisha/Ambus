@@ -26,6 +26,7 @@ namespace AMBUS_Master
             COMport = Buffer[0];
             COMbaud = 115200;
             RichTextBoxExtensions.crcForm = Ambus.CRCFormat.HexCRC;
+            listBoxCommands.DisplayMember = "ShowName";
             UpdateStatus();
             
             Debug.WriteLine("-------START DEBUG--------");
@@ -252,6 +253,122 @@ namespace AMBUS_Master
         {
             RichTextBoxExtensions.crcForm = Ambus.CRCFormat.NoCRC;
         }
+
+        private void listBoxCommands_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStripListBox.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void listBoxCommands_DoubleClick(object sender, EventArgs e)
+        {
+            if (!serialPort.IsOpen) return;
+
+            if (listBoxCommands.SelectedIndex == -1) return;
+            byte[] packet = new byte[Ambus.PACKET_SIZE];
+            Message selectedMessage = (Message)listBoxCommands.Items[listBoxCommands.SelectedIndex];
+            if(selectedMessage.Data == "")
+            {
+                packet = Ambus.GetPacket(selectedMessage.Address, selectedMessage.Command);
+            }
+            else
+            {
+                packet = Ambus.GetPacket(selectedMessage.Address, selectedMessage.Command, selectedMessage.Data);
+            }
+
+            //querry
+            serialPort.Write(packet, 0, Ambus.GetPacketLength(packet));
+            richTextBoxComm.AppendText(Ambus.PacketToString(packet), Color.HotPink);
+
+            //response
+            string txt;
+            try
+            {
+                txt = serialPort.ReadLine() + '\n';
+                richTextBoxComm.AppendText(txt, Color.Black);
+            }
+            catch
+            {
+                richTextBoxComm.AppendText("ERROR: Timeout\r", Color.Red);
+            }
+        }
+
+        private void createCommandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Message M = new Message();
+            M.Address = textBoxAddress.Text;
+            M.Command = textBoxCommand.Text;
+            M.Data = textBoxData.Text;
+            CreateMessage createMessage = new CreateMessage(M);
+            DialogResult dr = createMessage.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                createMessage.Close();
+            }
+            else if (dr == DialogResult.OK)
+            {
+                if (createMessage.M.ShowName != "") listBoxCommands.Items.Add(createMessage.M);
+                createMessage.Close();
+            }
+        }
+
+        private void deleteCommandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            while (listBoxCommands.SelectedIndex != -1)
+            {
+                listBoxCommands.Items.RemoveAt(listBoxCommands.SelectedIndex);
+            }
+        }
+
+        private void editCommandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBoxCommands.SelectedIndex == -1) return;
+
+            CreateMessage createMessage = new CreateMessage((Message)listBoxCommands.SelectedItem);
+            DialogResult dr = createMessage.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                createMessage.Close();
+            }
+            else if (dr == DialogResult.OK)
+            {
+                if (createMessage.M.ShowName != "") listBoxCommands.Items[listBoxCommands.SelectedIndex] = createMessage.M;
+                createMessage.Close();
+            }
+        }
+
+        private void sendCommandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listBoxCommands_DoubleClick(sender, e);
+        }
+
+        private void showMessageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBoxCommands.SelectedIndex == -1) return;
+
+            Message M = (Message)listBoxCommands.SelectedItem;
+            textBoxAddress.Text = M.Address;
+            textBoxCommand.Text = M.Command;
+            textBoxData.Text = M.Data;
+        }
+
+        private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBoxCommands.SelectedIndex == -1) return;
+
+            listBoxCommands.Items.Add(listBoxCommands.Items[listBoxCommands.SelectedIndex]);
+        }
+    }
+
+    public class Message
+    {
+        public string ShowName { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Command { get; set; }
+        public string Data { get; set; }
     }
 
     public static class RichTextBoxExtensions

@@ -59,6 +59,12 @@
     <Compile Include="COMsettings.Designer.cs">
       <DependentUpon>COMsettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateMessage.Designer.cs">
+      <DependentUpon>CreateMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Echo.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -78,6 +84,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="COMsettings.resx">
       <DependentUpon>COMsettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateMessage.resx">
+      <DependentUpon>CreateMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Echo.resx">
       <DependentUpon>Echo.cs</DependentUpon>
