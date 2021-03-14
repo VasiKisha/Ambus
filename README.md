@@ -11,7 +11,7 @@ PC sw application to control HW peripherals with custom serial communication pro
 
 ## Peripheral hardware
 - [Echo Radar](https://github.com/VasiKisha/Ambus---EchoRadar)
-- Universal Programmable PSU
+- [Universal Programmable PSU](https://github.com/VasiKisha/Ambus---UPPSU)
 
 ## Protocol desctription
 Ambus is a simple, easy to read, querry - response protocol. Data are transferred in ASCII format.
