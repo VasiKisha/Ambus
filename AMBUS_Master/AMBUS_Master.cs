@@ -10,6 +10,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO.Ports;
+using System.IO;
+using System.Collections;
+using System.Xml.Serialization;
 
 namespace AMBUS_Master
 {
@@ -17,24 +20,35 @@ namespace AMBUS_Master
     {
         public static string COMport;
         public static int COMbaud;
+        public static string MessageXmlPath;
 
         public AMBUS_Master()
         {
             InitializeComponent();
-         
+
             string[] Buffer = SerialPort.GetPortNames();
             COMport = Buffer[0];
             COMbaud = 115200;
+            MessageXmlPath = "Messages.xml";
             RichTextBoxExtensions.crcForm = Ambus.CRCFormat.HexCRC;
             listBoxCommands.DisplayMember = "ShowName";
             UpdateStatus();
-            
+
             Debug.WriteLine("-------START DEBUG--------");
         }
 
         private void AMBUS_Master_Load(object sender, EventArgs e)
         {
             serialPort.Encoding = Encoding.GetEncoding(28591);
+                        
+            XmlSerializer x = new XmlSerializer(typeof(ArrayList), new Type[] { typeof(Message) });
+            StreamReader reader = new StreamReader(MessageXmlPath);
+            ArrayList list = (ArrayList)x.Deserialize(reader);
+            reader.Close();
+            foreach (Message item in list)
+            {
+                listBoxCommands.Items.Add(item);
+            }
         }
 
         //public string GetString()
@@ -163,7 +177,7 @@ namespace AMBUS_Master
                 richTextBoxComm.AppendText("ERROR: Address and command must any character\n", Color.Red);
                 return;
             }
-            
+
             //querry
             serialPort.Write(packet, 0, Ambus.GetPacketLength(packet));
             richTextBoxComm.AppendText(Ambus.PacketToString(packet), Color.HotPink);
@@ -269,7 +283,7 @@ namespace AMBUS_Master
             if (listBoxCommands.SelectedIndex == -1) return;
             byte[] packet = new byte[Ambus.PACKET_SIZE];
             Message selectedMessage = (Message)listBoxCommands.Items[listBoxCommands.SelectedIndex];
-            if(selectedMessage.Data == "")
+            if (selectedMessage.Data == "")
             {
                 packet = Ambus.GetPacket(selectedMessage.Address, selectedMessage.Command);
             }
@@ -359,6 +373,21 @@ namespace AMBUS_Master
             if (listBoxCommands.SelectedIndex == -1) return;
 
             listBoxCommands.Items.Add(listBoxCommands.Items[listBoxCommands.SelectedIndex]);
+        }
+
+        private void AMBUS_Master_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ArrayList list = new ArrayList();
+            foreach (Message item in listBoxCommands.Items)
+            {
+                list.Add(item);
+            }
+
+            XmlSerializer x = new XmlSerializer(typeof(ArrayList), new Type[] { typeof(Message) });
+            StreamWriter write = new StreamWriter(MessageXmlPath);
+            x.Serialize(write, list);
+            
+            write.Close();
         }
     }
 

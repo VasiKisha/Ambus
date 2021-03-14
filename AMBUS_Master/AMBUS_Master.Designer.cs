@@ -67,11 +67,11 @@ namespace AMBUS_Master
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.createCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sendCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlComm.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -390,19 +390,19 @@ namespace AMBUS_Master
             this.createCommandToolStripMenuItem.Text = "Create";
             this.createCommandToolStripMenuItem.Click += new System.EventHandler(this.createCommandToolStripMenuItem_Click);
             // 
-            // deleteCommandToolStripMenuItem
-            // 
-            this.deleteCommandToolStripMenuItem.Name = "deleteCommandToolStripMenuItem";
-            this.deleteCommandToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.deleteCommandToolStripMenuItem.Text = "Delete";
-            this.deleteCommandToolStripMenuItem.Click += new System.EventHandler(this.deleteCommandToolStripMenuItem_Click);
-            // 
             // editCommandToolStripMenuItem
             // 
             this.editCommandToolStripMenuItem.Name = "editCommandToolStripMenuItem";
             this.editCommandToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.editCommandToolStripMenuItem.Text = "Edit";
             this.editCommandToolStripMenuItem.Click += new System.EventHandler(this.editCommandToolStripMenuItem_Click);
+            // 
+            // duplicateToolStripMenuItem
+            // 
+            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.duplicateToolStripMenuItem.Text = "Duplicate";
+            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // sendCommandToolStripMenuItem
             // 
@@ -411,19 +411,19 @@ namespace AMBUS_Master
             this.sendCommandToolStripMenuItem.Text = "Send";
             this.sendCommandToolStripMenuItem.Click += new System.EventHandler(this.sendCommandToolStripMenuItem_Click);
             // 
+            // deleteCommandToolStripMenuItem
+            // 
+            this.deleteCommandToolStripMenuItem.Name = "deleteCommandToolStripMenuItem";
+            this.deleteCommandToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.deleteCommandToolStripMenuItem.Text = "Delete";
+            this.deleteCommandToolStripMenuItem.Click += new System.EventHandler(this.deleteCommandToolStripMenuItem_Click);
+            // 
             // showMessageToolStripMenuItem
             // 
             this.showMessageToolStripMenuItem.Name = "showMessageToolStripMenuItem";
             this.showMessageToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.showMessageToolStripMenuItem.Text = "Show";
             this.showMessageToolStripMenuItem.Click += new System.EventHandler(this.showMessageToolStripMenuItem_Click);
-            // 
-            // duplicateToolStripMenuItem
-            // 
-            this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.duplicateToolStripMenuItem.Text = "Duplicate";
-            this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
             // AMBUS_Master
             // 
@@ -441,6 +441,7 @@ namespace AMBUS_Master
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "AMBUS_Master";
             this.Text = "AMBUS Master";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AMBUS_Master_FormClosing);
             this.Load += new System.EventHandler(this.AMBUS_Master_Load);
             this.tabControlComm.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);
