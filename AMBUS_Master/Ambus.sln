@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.1259
+VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambus", "AMBUS_Master\Ambus.csproj", "{A826FB40-E03F-465E-8C69-2A8213B9F037}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambus", "Ambus.csproj", "{A826FB40-E03F-465E-8C69-2A8213B9F037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9C874C0B-DEF8-4D46-925A-D24D0BB6E174}
+		SolutionGuid = {650338BC-0C86-4450-8799-5C436AAA8A01}
 	EndGlobalSection
 EndGlobal
