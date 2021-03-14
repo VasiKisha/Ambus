@@ -6,7 +6,7 @@ PC sw application to control HW peripherals with custom serial communication pro
 ![Alt text](/pictures/console.png)
 - EchoRadar GUI  
 ![Alt text](/pictures/radar.png)
-- UPPSU GUI
+- UPPSU GUI  
 ![Alt text](/pictures/UPPSU.png)
 
 ## Peripheral hardware
