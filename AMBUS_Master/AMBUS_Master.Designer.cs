@@ -152,6 +152,7 @@ namespace AMBUS_Master
             // 
             // listBoxCommands
             // 
+            this.listBoxCommands.AllowDrop = true;
             this.listBoxCommands.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxCommands.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listBoxCommands.FormattingEnabled = true;
@@ -161,6 +162,8 @@ namespace AMBUS_Master
             this.listBoxCommands.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.listBoxCommands.Size = new System.Drawing.Size(256, 439);
             this.listBoxCommands.TabIndex = 8;
+            this.listBoxCommands.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBoxCommands_DragDrop);
+            this.listBoxCommands.DragOver += new System.Windows.Forms.DragEventHandler(this.listBoxCommands_DragOver);
             this.listBoxCommands.DoubleClick += new System.EventHandler(this.listBoxCommands_DoubleClick);
             this.listBoxCommands.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBoxCommands_MouseDown);
             // 

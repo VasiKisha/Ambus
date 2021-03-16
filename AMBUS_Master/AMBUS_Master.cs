@@ -270,10 +270,37 @@ namespace AMBUS_Master
 
         private void listBoxCommands_MouseDown(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Right)
             {
                 contextMenuStripListBox.Show(MousePosition.X, MousePosition.Y);
             }
+            else if (e.Button == MouseButtons.Left && e.Clicks == 1)
+            {
+                ListBox lbc = (ListBox)sender;
+                Point pt = new Point(e.X, e.Y);
+                int index = lbc.IndexFromPoint(pt);
+                if (index >= 0)
+                {
+                    lbc.DoDragDrop(lbc.Items[index], DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void listBoxCommands_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void listBoxCommands_DragDrop(object sender, DragEventArgs e)
+        {
+            Point point = listBoxCommands.PointToClient(new Point(e.X, e.Y));
+            int index = listBoxCommands.IndexFromPoint(point);
+            if (index < 0) index = listBoxCommands.Items.Count - 1;
+            object data = e.Data.GetData(typeof(Message));
+            listBoxCommands.Items.RemoveAt(listBoxCommands.SelectedIndex);
+            listBoxCommands.Items.Insert(index, data);
+            listBoxCommands.SelectedIndex = index;
         }
 
         private void listBoxCommands_DoubleClick(object sender, EventArgs e)
@@ -330,7 +357,7 @@ namespace AMBUS_Master
 
         private void deleteCommandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            while (listBoxCommands.SelectedIndex != -1)
+            while (listBoxCommands.SelectedIndex >= 0)
             {
                 listBoxCommands.Items.RemoveAt(listBoxCommands.SelectedIndex);
             }
@@ -370,9 +397,8 @@ namespace AMBUS_Master
 
         private void duplicateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBoxCommands.SelectedIndex == -1) return;
-
-            listBoxCommands.Items.Add(listBoxCommands.Items[listBoxCommands.SelectedIndex]);
+            if (listBoxCommands.SelectedItem == null) return;
+            listBoxCommands.Items.Add((Message)listBoxCommands.Items[listBoxCommands.SelectedIndex]);
         }
 
         private void AMBUS_Master_FormClosing(object sender, FormClosingEventArgs e)
