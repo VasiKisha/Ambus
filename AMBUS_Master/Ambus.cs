@@ -12,7 +12,6 @@ namespace AMBUS_Master
 {
     public static class Ambus
     {
-        private static string myAddress = "MASTER";
         public const char START_OF_PACKET = '$';
         public const char SEPARATOR = ';';
         public const char END_OF_PACKET = '\n';
@@ -28,16 +27,6 @@ namespace AMBUS_Master
             RawCRC,
             NoCRC,
             HexCRC,
-        }
-
-        public static void SetMyAddress(string address)
-        {
-            myAddress = address;
-        }
-
-        public static string GetMyAddress()
-        {
-            return myAddress;
         }
 
         public static byte[] GetPacket(string address, string command)

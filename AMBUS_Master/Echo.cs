@@ -135,7 +135,7 @@ namespace AMBUS_Master
                 {
                     txt = SerialPort.ReadLine() + '\n';
                     RichTextBoxComm.AppendText(txt, Color.Black);
-                    if (Ambus.GetAddress(txt) == Ambus.GetMyAddress() && Ambus.GetCommand(txt) == "Dur?")
+                    if (Ambus.GetCommand(txt) == "Dur?")
                     {
                         int temp = int.Parse(Ambus.GetData(txt));
                         if (temp == 0) rLenght = 1;
