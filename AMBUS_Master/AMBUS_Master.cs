@@ -174,7 +174,7 @@ namespace AMBUS_Master
             packet = Ambus.GetPacket(textBoxAddress.Text, textBoxCommand.Text, textBoxData.Text);
             if (packet == null)
             {
-                richTextBoxComm.AppendText("ERROR: Address and command must any character\n", Color.Red);
+                richTextBoxComm.AppendText("ERROR: wrong message format\n", Color.Red);
                 return;
             }
 
@@ -191,7 +191,7 @@ namespace AMBUS_Master
             }
             catch
             {
-                richTextBoxComm.AppendText("ERROR: Timeout\r", Color.Red);
+                richTextBoxComm.AppendText("ERROR: Timeout\n", Color.Red);
             }
         }
 
